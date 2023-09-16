@@ -7,7 +7,7 @@ lista_usuarios = {
     'JLucaz': {'nome': 'João', 'senha': '12345', 'data_aniversario': '27/07/2004', 'dados': {'numero_telefone': '11-95471-5099', 'email': 'joaolucasyudi@gmail.com', 'cep': '06040-470', 'endereco': {'rua': 'Lázaro Suave', 'rua_numero': '283'}, 'tamanho_estabelecimento': 300, 'conta_luz': 5000}},
     'Lucazy': {'nome': 'Lucas', 'senha': '0000', 'data_aniversario': '01/09/2003', 'dados': {'numero_telefone': '11-95471-5099', 'email': 'joaolucasyudi@gmail.com', 'cep': '06040-470', 'endereco': {'rua': 'Lázaro Suave', 'rua_numero': '283'}, 'tamanho_estabelecimento': 200, 'conta_luz': 3000}}
 }
-horarios_disponiveis = ('11:00', '9:30', '14:00', '17:301')
+horarios_disponiveis = ('11:00', '9:30', '14:00', '17:30')
 tarifa_luz = (0.96, 0.88, 0.8, 0.76)
 
 
@@ -62,7 +62,7 @@ def validacao():
     escolha_login_criar_usuario = 0
     while escolha_login_criar_usuario != 1 or escolha_login_criar_usuario != 2:
         try:
-            escolha_login_criar_usuario = int(input("1 - Criar novo usuário\n2 - Log In\n"))
+            escolha_login_criar_usuario = int(input("1 - Criar novo usuário\n2 - Log In\n3 - Sair"))
             match escolha_login_criar_usuario:
                 case 1:
                     while True:
@@ -112,6 +112,10 @@ def validacao():
                             main(lista_usuarios[login]['nome'], login)
                         elif not lista_usuarios[login]['senha'] == senha:
                             print("Digite a senha corretamente!")
+
+                case 3:
+                    print("Obrigado por usar o programa!")
+                    exit()
                 case _:
                     print("Opção inválida!")
         except ValueError:
