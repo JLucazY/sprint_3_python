@@ -1,8 +1,8 @@
-#imports
+# imports
 import re
 import random
 
-#Dicionários e tuples que simulam o banco de dados da empresa
+# Dicionários e tuples que simulam o banco de dados da empresa
 lista_usuarios = {
     'JLucaz': {'nome': 'João', 'senha': '12345', 'data_aniversario': '27/07/2004', 'dados': {'numero_telefone': '11-95471-5099', 'email': 'joaolucasyudi@gmail.com', 'cep': '06040-470', 'endereco': {'rua': 'Lázaro Suave', 'rua_numero': '283'}, 'tamanho_estabelecimento': 300, 'conta_luz': 5000}},
     'Lucazy': {'nome': 'Lucas', 'senha': '0000', 'data_aniversario': '01/09/2003', 'dados': {'numero_telefone': '11-95471-5099', 'email': 'joaolucasyudi@gmail.com', 'cep': '06040-470', 'endereco': {'rua': 'Lázaro Suave', 'rua_numero': '283'}, 'tamanho_estabelecimento': 200, 'conta_luz': 3000}}
@@ -11,11 +11,12 @@ horarios_disponiveis = ('11:00', '9:30', '14:00', '17:30')
 tarifa_luz = (0.96, 0.88, 0.8, 0.76)
 
 
-
-#Função que valida o nome do usuário
+# Função que valida o nome do usuário
 def validar_nome(nome):
     return re.match(r"^[A-Za-zÀ-ÿ\s]+$", nome)
-#Função que valida o ano de nascimento seguindo a realiadade dos dias do ano
+# Função que valida o ano de nascimento seguindo a realiadade dos dias do ano
+
+
 def validar_ano_nascimento(data):
     if not re.match(r'\d{2}/\d{2}/\d{4}', data):
         return False
@@ -28,41 +29,59 @@ def validar_ano_nascimento(data):
     if not (1 <= dia <= dias_por_mes[mes]):
         return False
     return True
-#Função que valida senha, max 5 números
+# Função que valida senha, max 5 números
+
+
 def validar_senha(senha):
     return re.match(r'^\d{1,5}$', senha)
-#Função que valida login, mín 6 e max 12 carac
+# Função que valida login, mín 6 e max 12 carac
+
+
 def validar_login(login):
     return re.match(r'^[a-zA-Z0-9]{6,12}$', login)
-#Função que valida o CEP (00000-000)
+# Função que valida o CEP (00000-000)
+
+
 def validar_cep(cep):
     return re.match(r'^\d{5}-\d{3}$', cep)
-#Função que valida o num de telefone
+# Função que valida o num de telefone
+
+
 def validar_telefone(telefone):
     return re.match(r'^\d{2}-\d{5}-\d{4}$', telefone)
-#Função que valida o email
+# Função que valida o email
+
+
 def validar_email(email):
     return re.match(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$', email)
-#Função que valida a rua
+# Função que valida a rua
+
+
 def validar_rua(rua):
     return not re.match(r'\d', rua)
-#Função que aceita apenas números
+# Função que aceita apenas números
+
+
 def validar_numero(numero):
     return re.match(r'^[0-9]+$', numero)
-#Função que escolhe randomicamente um elemento da tuple
+# Função que escolhe randomicamente um elemento da tuple
+
+
 def escolha_random(lista):
     return random.choice(lista)
+
 
 tarifa = escolha_random(tarifa_luz)
 horario_visita = escolha_random(horarios_disponiveis)
 
 
-#Função de entrada que simula uma tela de login e criação de usuários
+# Função de entrada que simula uma tela de login e criação de usuários
 def validacao():
     escolha_login_criar_usuario = 0
     while escolha_login_criar_usuario != 1 or escolha_login_criar_usuario != 2:
         try:
-            escolha_login_criar_usuario = int(input("1 - Criar novo usuário\n2 - Log In\n3 - Sair"))
+            escolha_login_criar_usuario = int(
+                input("1 - Criar novo usuário\n2 - Log In\n3 - Sair\n"))
             match escolha_login_criar_usuario:
                 case 1:
                     while True:
@@ -71,9 +90,11 @@ def validacao():
                             lista_usuarios.update({f'{login}': {}})
                             break
                         elif not validar_login(login):
-                            print("Nome de log in precisa ter no mínimo 6 e no máximo 12 caracteres")
+                            print(
+                                "Nome de log in precisa ter no mínimo 6 e no máximo 12 caracteres")
                         else:
-                            print(f"{login} já está cadastrados no nosso banco de dados!")
+                            print(
+                                f"{login} já está cadastrados no nosso banco de dados!")
 
                     while True:
                         nome = input("Digite seu nome: ").capitalize()
@@ -93,12 +114,14 @@ def validacao():
                             print("Senha inválida! use entre 1 e 5 dígitos.")
 
                     while True:
-                        data_aniversario = input("Digite sua data de aniversário: ")
+                        data_aniversario = input(
+                            "Digite sua data de aniversário: ")
                         if validar_ano_nascimento(data_aniversario):
                             lista_usuarios[login]['data_aniversario'] = data_aniversario
                             break
                         else:
-                            print("Formato inválido! digite a senha nesse paramêtro(00/00/0000)")
+                            print(
+                                "Formato inválido! digite a senha nesse paramêtro(00/00/0000)")
                     print(f"Sucesso ao cadastrar usuário {login}!")
 
                 case 2:
@@ -121,7 +144,9 @@ def validacao():
         except ValueError:
             print("Digite apenas números!")
 
-#Função do menu principalmente
+# Função do menu principalmente
+
+
 def main(nome, login):
     print(f"Bem vindo {nome}")
     while True:
@@ -145,7 +170,8 @@ def main(nome, login):
 
             elif menu == 1:
                 if not 'dados' in lista_usuarios[login]:
-                    print(f"{nome}, você precisa registrar os dados energéticos primeiro!")
+                    print(
+                        f"{nome}, você precisa registrar os dados energéticos primeiro!")
                 else:
                     servicos(nome, login)
 
@@ -165,7 +191,9 @@ def main(nome, login):
         except ValueError:
             print("Digite apenas números!")
 
-#Função de serviços que a empresa presta
+# Função de serviços que a empresa presta
+
+
 def servicos(nome, login):
     while True:
         try:
@@ -188,12 +216,15 @@ def servicos(nome, login):
                     case 1:
 
                         while True:
-                            print(f"Dados cadastrados:\nConta de luz: R$ {lista_usuarios[login]['dados']['conta_luz']}\nTarifa energética por Kwh no seu estado: {tarifa}R$/kWh")
+                            print(
+                                f"Dados cadastrados:\nConta de luz: R$ {lista_usuarios[login]['dados']['conta_luz']}\nTarifa energética por Kwh no seu estado: {tarifa}R$/kWh")
                             print("Calculando...")
 
-                            conta_luz = (lista_usuarios[login]['dados']['conta_luz'] * tarifa)
+                            conta_luz = (
+                                lista_usuarios[login]['dados']['conta_luz'] * tarifa)
 
-                            print(f"{nome}, baseado em cálculos aritméticos, a conta de luz que o senhor(a) pagará após a eficiência energética é de {conta_luz:.2f}!\n")
+                            print(
+                                f"{nome}, baseado em cálculos aritméticos, a conta de luz que o senhor(a) pagará após a eficiência energética é de {conta_luz:.2f}!\n")
                             break
 
                     case 2:
@@ -206,7 +237,8 @@ def servicos(nome, login):
 
                                 elif dia <= 31 and dia >= 1:
 
-                                    print(f"Agendado senhor(a) {nome}, o dia para a realização da inspeção será {dia} ás {horario_visita}!\n")
+                                    print(
+                                        f"Agendado senhor(a) {nome}, o dia para a realização da inspeção será {dia} ás {horario_visita}!\n")
                                     break
 
                                 else:
@@ -217,7 +249,8 @@ def servicos(nome, login):
 
                     case 3:
                         while True:
-                            print(f"{nome}, quantos metros quadrados dispoviveis você tem para a instalação dos paíneis em {lista_usuarios[login]['dados']['tamanho_estabelecimento']} m²")
+                            print(
+                                f"{nome}, quantos metros quadrados dispoviveis você tem para a instalação dos paíneis em {lista_usuarios[login]['dados']['tamanho_estabelecimento']} m²")
                             try:
                                 m2 = float(input())
                                 if not isinstance(m2, float):
@@ -228,7 +261,8 @@ def servicos(nome, login):
 
                                 else:
                                     preco_painel_solar = m2 * 100
-                                    print(f"{nome}, o orçamento de instalação será de R${preco_painel_solar:.2f}\n")
+                                    print(
+                                        f"{nome}, o orçamento de instalação será de R${preco_painel_solar:.2f}\n")
                                     break
                             except ValueError:
                                 print("Digite apenas números")
@@ -239,11 +273,13 @@ def servicos(nome, login):
         except ValueError:
             print("Digite uma opção correspondente!")
 
+
 def cadastrar_dados(login, nome):
     lista_usuarios[login].update({'dados': {}})
     print(f"{nome}, precisamos coletar alguns dados!")
     while True:
-        numero_telefone = input("Digite seu número de telefone 00-00000-0000: ")
+        numero_telefone = input(
+            "Digite seu número de telefone 00-00000-0000: ")
         if validar_telefone(numero_telefone):
             lista_usuarios[login]['dados']['numero_telefone'] = numero_telefone
             break
@@ -284,7 +320,8 @@ def cadastrar_dados(login, nome):
             print("Digite apenas números!")
     while True:
         try:
-            tamanho_estab_metros = float(input("Digite o tamanho do local (m2): "))
+            tamanho_estab_metros = float(
+                input("Digite o tamanho do local (m2): "))
             if isinstance(tamanho_estab_metros, float):
                 lista_usuarios[login]['dados']['tamanho_estabelecimento'] = tamanho_estab_metros
                 break
@@ -313,10 +350,11 @@ def cadastrar_dados(login, nome):
     conta de energia - {conta_luz}
     """)
 
-
     main(nome, login)
 
-#Função que simula uma aba de 'sobre nós'
+# Função que simula uma aba de 'sobre nós'
+
+
 def sobre_nos(nome, login):
     while True:
         print("""
@@ -340,6 +378,7 @@ def sobre_nos(nome, login):
                 main(nome, login)
         except ValueError:
             print("Digite apenas números!")
+
 
 def sair(nome, login):
     if 'dados' in lista_usuarios[login]:
@@ -383,7 +422,7 @@ def sair(nome, login):
         try:
             print("1 - nova operação\n2 - Encerrar")
             continuar = int(input())
-            if continuar <= 0 or continuar >=3:
+            if continuar <= 0 or continuar >= 3:
                 print("Número fora do range usado!")
             elif not isinstance(continuar, int):
                 raise ValueError
