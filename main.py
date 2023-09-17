@@ -92,9 +92,11 @@ def validacao():
                         elif not validar_login(login):
                             print(
                                 "Nome de log in precisa ter no mínimo 6 e no máximo 12 caracteres")
+
                         else:
                             print(
                                 f"{login} já está cadastrados no nosso banco de dados!")
+                          
 
                     while True:
                         nome = input("Digite seu nome: ").capitalize()

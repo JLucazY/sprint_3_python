@@ -1,0 +1,12 @@
+João Lucas Yudi - rm98458
+Gabriel Teixeira Machado - rm551570
+Lucas Toledo - rm97913
+Igor Nunes Teixeira - rm
+
+Funcionalidades:
+ - O programa inicia chamando uma função que valida o usuário ou cria um novo para então chamar a função principal em que o menu está
+ - No menu, existem 4 funcionalidades macro: Tipos de serviço, cadastrar dados energéticos, sobre nós e sair.
+ - na função tipo de serviços, ele exibe os serviços que a Akona presta
+ - na função 'Cadastrar dados energéticos' ele vai pedir pro usuário dados e os joga em um 'banco de dados'
+ - na função 'sobre nós' é exibido informaçãoes sobre a Akona
+ - na função sair o programa pergunta se o usuário realmente quer encerrar a operação ou realizar uma nova, ela também mostra os dados cadastrados pelo usuário
